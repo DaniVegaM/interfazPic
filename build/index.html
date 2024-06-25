@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+    <main class="main">
+        <section class="headers">
+            <h1 class="titulo">Proyecto Final</h1>
+            <h2 class="subtitulo">Instrumentación y control</h2>
+            <p class="grupo">Grupo 5CM1</p>
+            <p class="integrantes"><span>Por:<br></span>Reyes Cuevas Abraham<br>Peñarrieta Villa Jesus<br>Vega Miranda Daniel</p>
+        </section>
+    
+        <section class="menu">
+            <div class="option">
+                <div>
+                    <p>Báscula Digital</p>
+                    <p class="detalles">Se desarrolló utilizando una galga extenciométrica, tambien se hizó uso de algunos circuitos tales como un amplificador de instrumentación.</p>
+                </div>
+                <div class="imagenContainer" onclick="moveTo('A')">
+                    <div class="imgCircle"><img src="img/bascula.png" alt="Bascula"></div>
+                </div>
+            </div>
+            <div class="option">
+                <div class="revez1">
+                    <p>Medidor de Pulso Cardíaco</p>
+                    <p class="detalles detalles-especial1">Se desarrolló utilizando un emisor y un receptor de luz infrarroja los cuales funcionan a partir de la luz que rebota en el flujo de sangre que llega a nuestro dedo.</p>
+                </div>
+                <div class="imagenContainer revez2" onclick="moveTo('B')">
+                    <div class="imgCircle"><img src="img/pulso.png" alt="Pulso cardiaco"></div>
+                </div>
+            </div>
+            <div class="option">
+                <div>
+                    <p>Medidor de Temperatura</p>
+                    <p class="detalles detalles-especial2">Se desarrolló utilizando un termistor NTC el cual a grandes rasgos podemos verlo como una resistencia la cual varía su valor conforme a la temperatura que perciba.</p>
+                </div>
+                <div class="imagenContainer" onclick="moveTo('C')">
+                    <div class="imgCircle"><img src="img/temperatura.png" alt="Temperatura"></div>
+                </div>
+            </div>
+            <!-- <button onclick="moveTo('A')">Bascula Digital</button>
+            <button onclick="moveTo('B')">Medidor de pulso cardiaco</button>
+            <button onclick="moveTo('C')">Medidor de temperatura</button> -->
+        </section>
+    </main>
+
+    <script>
+        function moveTo(option){
+            switch (option){
+                case "A":
+                window.location.href = 'bascula.html';
+                break;
+                case "B":
+                window.location.href = 'pulso.html';
+                break;
+                case "C":
+                window.location.href = 'temperatura.html';
+                break;
+            }
+        }
+      </script>
+</body>
+</html>

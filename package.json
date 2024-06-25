@@ -1,0 +1,48 @@
+{
+  "name": "proyecto-final-instru",
+  "version": "1.0.0",
+  "description": "Proyecto de Node que usa Serial Port para conectarse con PIC",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "nodemon ./backEnd/serialport.js",
+    "server": "nodemon ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaniVegaM/interfazPic.git"
+  },
+  "keywords": [
+    "PIC",
+    "Interfaz",
+    "SerialPort"
+  ],
+  "author": "Dani Vega",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DaniVegaM/interfazPic/issues"
+  },
+  "homepage": "https://github.com/DaniVegaM/interfazPic#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "cssnano": "^6.0.1",
+    "gulp": "^4.0.1",
+    "gulp-avif": "^1.1.1",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-postcss": "^9.0.1",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-webp": "^4.0.1",
+    "postcss": "^8.4.31",
+    "sass": "^1.77.6"
+  },
+  "browserslist": [
+    "last 2 version",
+    "> 1%"
+  ],
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4",
+    "serialport": "^12.0.0"
+  }
+}

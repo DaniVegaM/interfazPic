@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bascula Digital</title>
+    <link rel="stylesheet" href="css/bascula.css">
+</head>
+
+<body>
+
+    <h1>¡Báscula digital!</h1>
+    <p id="bienvenida"></p> <!-- Bienvenida -->
+
+    <button id="startButton">Iniciar</button>
+
+    <p id="valorCircuito"></p>
+
+    <script>
+        const bienvenida = document.getElementById("bienvenida");
+        const startButton = document.getElementById("startButton");
+        const valorCircuito = document.getElementById("valorCircuito");
+        let solo1Bienvenida = 0;
+
+        //Dar Bienvenida
+        document.addEventListener('DOMContentLoaded', () => {
+            if(solo1Bienvenida == 0){
+                fetch('/receive-data')
+                    .then(response => response.json())
+    
+                    .then(data => {
+                        bienvenida.innerText = data.receivedData;
+                        solo1Bienvenida++;
+                    })
+    
+                    .catch(error => console.error('Error:', error));
+            }
+        });
+        //Fin Bienvenida
+
+        //Iniciar OP
+        startButton.addEventListener('click', () => {
+            console.log("Boton presionado");
+            enviarDatoAlServidor('1'); //Escribir un 1 para la bascula para menu de interrupciones del PIC
+
+            setInterval(obtenerYMostrarValor, 2000);  //Actualización cada 5 segundos
+            obtenerYMostrarValor();
+        });
+        //Fin OP
+
+        //Mostrar Datos y actualizarlos
+        async function obtenerYMostrarValor() {
+            try {
+                const response = await fetch('/receive-data');
+                const data = await response.json();
+
+                let valor = parseFloat(data.receivedData); // Convertir a número
+                if (isNaN(valor)) {
+                    throw new Error('Datos no válidos recibidos');
+                }
+
+                let resultado = operarBascula(valor);
+                valorCircuito.innerText = resultado;
+            } catch (error) {
+                console.error('Error al obtener el valor:', error);
+            }
+        }
+        //Fin Mostrar Datos y actualizarlos
+
+        function operarBascula(valor){
+            return valor;
+        }
+
+        //Enviar Datos
+        async function enviarDatoAlServidor(valor) {
+            try {
+                const response = await fetch('/send-data', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ data: valor })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta del servidor');
+                }
+
+                const result = await response.json();
+                console.log('Respuesta del servidor:', result);
+            } catch (error) {
+                console.error('Error al enviar el dato al servidor:', error);
+            }
+        }
+        //Fin Enviar Datos
+    </script>
+</body>
+
+</html>
