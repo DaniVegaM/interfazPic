@@ -1,0 +1,158 @@
+
+
+
+
+.main__pulso{
+    background-color: #ffd166;
+    color: #111111;
+    .titulo{
+        font-size: 4.2rem;
+        color: #14213d;
+    }
+    .imgContainer{
+        width: 40rem;
+        margin: 10rem auto 10rem auto;
+        animation: latir 3s infinite;
+        img{
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+    }
+    #startButton{
+        margin-top: 4rem;
+    }
+    .valorDelPic{
+        background-color: #FFFFFF;
+        font-weight: bold;
+        width: 12.5rem;
+        height: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        padding: 2rem 0;
+        margin-top: -30rem;
+        margin-left: 50rem;
+        position: relative;
+    }
+    .instruccionPulso{
+        margin-top: 20rem;
+        font-size: 2rem;
+        padding: 2rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #80ed99;
+        border-radius: 2rem;
+    }
+}
+
+
+button {
+    position: relative;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    outline-offset: 4px;
+    transition: filter 250ms;
+    user-select: none;
+    touch-action: manipulation;
+   }
+   
+   .shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: hsl(0deg 0% 0% / 0.25);
+    will-change: transform;
+    transform: translateY(2px);
+    transition: transform
+       600ms
+       cubic-bezier(.3, .7, .4, 1);
+   }
+   
+   .edge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: linear-gradient(
+       to left,
+       hsl(340deg 100% 16%) 0%,
+       hsl(340deg 100% 32%) 8%,
+       hsl(340deg 100% 32%) 92%,
+       hsl(340deg 100% 16%) 100%
+     );
+   }
+   
+   .front {
+    display: block;
+    position: relative;
+    padding: 12px 27px;
+    border-radius: 12px;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    color: white;
+    background-color: #ef476f;
+    will-change: transform;
+    transform: translateY(-4px);
+    transition: transform
+       600ms
+       cubic-bezier(.3, .7, .4, 1);
+    width: 18rem;
+    height: 5rem;
+   }
+   
+   button:hover {
+    filter: brightness(110%);
+   }
+   
+   button:hover .front {
+    transform: translateY(-6px);
+    transition: transform
+       250ms
+       cubic-bezier(.3, .7, .4, 1.5);
+   }
+   
+   button:active .front {
+    transform: translateY(-2px);
+    transition: transform 34ms;
+   }
+   
+   button:hover .shadow {
+    transform: translateY(4px);
+    transition: transform
+       250ms
+       cubic-bezier(.3, .7, .4, 1.5);
+   }
+   
+   button:active .shadow {
+    transform: translateY(1px);
+    transition: transform 34ms;
+   }
+   
+   button:focus:not(:focus-visible) {
+    outline: none;
+   }
+
+   @keyframes latir {
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.2);
+    }
+    100%{
+        transform: scale(1);
+    }
+   }

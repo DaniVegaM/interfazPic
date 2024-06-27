@@ -5,17 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bascula Digital</title>
-    <link rel="stylesheet" href="css/bascula.css">
+    <link rel="stylesheet" href="css/app.css">
 </head>
 
 <body>
 
-    <h1>¡Báscula digital!</h1>
-    <p id="bienvenida"></p> <!-- Bienvenida -->
+    <main class="main main__bascula">
+        <div class="header">
+            <h1 class="titulo">¡Midamos el peso que recibe la bascula!</h1>
+            <!-- <p id="bienvenida"></p> Bienvenida -->
+            <button id="startButton" class="btn">
+                <span class="shadow"></span>
+                <span class="edge"></span>
+                <span class="front text">Medir</span>
+            </button>
+            <div class="circleAnime"></div>
+            <div class="imgContainer">
+                <img src="img/basculaAnime.png" alt="">
+            </div>
+        </div>
 
-    <button id="startButton">Iniciar</button>
-
-    <p id="valorCircuito"></p>
+        <div>
+            <p class="valorDelPic" ><span id="valorCircuito"></span>KG</p>
+        </div>
+        <div>
+            <p class="instruccionBascula" id="divIniciado">Coloca algun peso sobre la bascula</p>
+        </div>
+    </main>
 
     <script>
         const bienvenida = document.getElementById("bienvenida");
@@ -44,6 +60,8 @@
             console.log("Boton presionado");
             enviarDatoAlServidor('1'); //Escribir un 1 para la bascula para menu de interrupciones del PIC
 
+            document.getElementById("divIniciado").classList.toggle("invisible");
+
             setInterval(obtenerYMostrarValor, 2000);  //Actualización cada 5 segundos
             obtenerYMostrarValor();
         });
@@ -55,13 +73,8 @@
                 const response = await fetch('/receive-data');
                 const data = await response.json();
 
-                let valor = parseFloat(data.receivedData); // Convertir a número
-                if (isNaN(valor)) {
-                    throw new Error('Datos no válidos recibidos');
-                }
+                valorCircuito.innerHTML = operarBascula(data.receivedData);
 
-                let resultado = operarBascula(valor);
-                valorCircuito.innerText = resultado;
             } catch (error) {
                 console.error('Error al obtener el valor:', error);
             }
@@ -69,7 +82,8 @@
         //Fin Mostrar Datos y actualizarlos
 
         function operarBascula(valor){
-            return valor;
+            valor = valor - 0.55;
+            return valor.toFixed(2);
         }
 
         //Enviar Datos

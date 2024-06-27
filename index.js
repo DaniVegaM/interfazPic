@@ -30,13 +30,13 @@ app.get('/temperatura', (req, res) => {
 
 app.get('/receive-data', (req, res) => { //READ DATA
     const data = { receivedData };
-    res.json(data);
+    parseFloat(res.json(data));
 });
 
 app.post('/send-data', express.json(), (req, res) => { //WRITE DATA
     const { data } = req.body;
     const dataRes = {receivedData};
-
+    
     console.log('Datos recibidos en /send-data:', req.body);
     
     port.write(data, (err) => {
@@ -52,7 +52,7 @@ app.post('/send-data', express.json(), (req, res) => { //WRITE DATA
 
 
 
-const portServer = 3007;
+const portServer = 3000;
 
 app.listen(portServer, () => {
     console.log(`El servidor está corriendo en el puerto ${portServer}`);

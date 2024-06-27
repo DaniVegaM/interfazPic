@@ -1,0 +1,52 @@
+
+
+
+
+.main__temperatura{
+    background-color: #118AB2;
+    color: #111111;
+    .titulo{
+        font-size: 4.2rem;
+        color: #FFFFFF;
+    }
+    .imgContainer{
+        width: 30rem;
+        margin: 8rem auto 14rem auto;
+        img{
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+    }
+    #startButton{
+        margin-top: 4rem;
+    }
+    .valorDelPic{
+        top: -14rem;
+        left: 3rem;
+        rotate: -45deg;
+        background-color: #FFFFFF;
+        border-radius: 2rem;
+        font-weight: bold;
+        width: 10rem;
+        height: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        padding: 2rem 0;
+        margin-top: -19.5rem;
+        margin-left: 50rem;
+        position: relative;
+    }
+    .instruccionTermometro{
+        margin-top: 10rem;
+        font-size: 2rem;
+        padding: 2rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #ffd166;
+        border-radius: 2rem;
+    }
+}

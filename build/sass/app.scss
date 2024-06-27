@@ -1,1 +1,8 @@
 @use "menu";
+@use "pulso";
+@use "bascula";
+@use "temperatura";
+
+.invisible{
+    display: none;
+}

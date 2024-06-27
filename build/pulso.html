@@ -5,17 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pulso Cardiaco</title>
-    <link rel="stylesheet" href="css/pulso.css">
+    <link rel="stylesheet" href="css/app.css">
 </head>
 
 <body>
+    <main class="main main__pulso">
+        <div class="header">
+            <h1 class="titulo">¡Midamos tu pulso cardiaco!</h1>
+            <!-- <p id="bienvenida"></p> Bienvenida -->
+            <button id="startButton" class="btn">
+                <span class="shadow"></span>
+                <span class="edge"></span>
+                <span class="front text">Medir</span>
+            </button> <!-- Aca abajo agrego imagenes etc -->
+            <div class="imgContainer"><img src="img/corazon.png" alt=""></div>
+        </div>
 
-    <h1>¡Pulso Cardiaco!</h1>
-    <p id="bienvenida"></p> <!-- Bienvenida -->
-
-    <button id="startButton">Iniciar</button>
-
-    <p id="valorCircuito"></p>
+        <div>
+            <p class="valorDelPic""><span id="valorCircuito"></span>p/m</p>
+        </div>
+        <div>
+            <p class="instruccionPulso" id="divIniciado">Coloca tu dedo en el sensor y espera 8 segundos</p>
+        </div>
+    </main>
 
     <script>
         const bienvenida = document.getElementById("bienvenida");
@@ -42,10 +54,12 @@
         //Iniciar OP
         startButton.addEventListener('click', () => {
             console.log("Boton presionado");
-            enviarDatoAlServidor('2'); //Escribir un 2 para la bascula para menu de interrupciones del PIC
+            enviarDatoAlServidor('2'); //Escribir un 2 para el pulso para menu de interrupciones del PIC
+
+            document.getElementById("divIniciado").classList.toggle("invisible");
 
             setInterval(obtenerYMostrarValor, 2000);  //Actualización cada 5 segundos
-            obtenerYMostrarValor();
+            obtenerYMostrarValor(); //En este caso solo se mostrara una sola vez a los 10 segundos en teoría
         });
         //Fin OP
 
@@ -55,13 +69,8 @@
                 const response = await fetch('/receive-data');
                 const data = await response.json();
 
-                let valor = parseFloat(data.receivedData); // Convertir a número
-                if (isNaN(valor)) {
-                    throw new Error('Datos no válidos recibidos');
-                }
+                valorCircuito.innerText = operarPulso(data.receivedData);
 
-                let resultado = operarPulso(valor);
-                valorCircuito.innerText = resultado;
             } catch (error) {
                 console.error('Error al obtener el valor:', error);
             }
@@ -69,7 +78,8 @@
         //Fin Mostrar Datos y actualizarlos
 
         function operarPulso(valor){
-            return valor;
+            valor = valor * 7.5 //Para obtener los pulsos por minuto
+            return valor.toFixed(0);
         }
 
         //Enviar Datos
@@ -94,6 +104,7 @@
             }
         }
         //Fin Enviar Datos
+
     </script>
 </body>
 

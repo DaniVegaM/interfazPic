@@ -5,17 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sensor de Temperatura</title>
-    <link rel="stylesheet" href="css/temperatura.css">
+    <link rel="stylesheet" href="css/app.css">
 </head>
 
 <body>
 
-    <h1>¡Sensor de Temperatura!</h1>
-    <p id="bienvenida"></p> <!-- Bienvenida -->
+    <main class="main main__temperatura">
+        <div class="header">
+            <h1 class="titulo">¡Midamos la temperatura!</h1>
+            <!-- <p id="bienvenida"></p> Bienvenida -->
+            <button id="startButton" class="btn">
+                <span class="shadow"></span>
+                <span class="edge"></span>
+                <span class="front text">Medir</span>
+            </button> <!-- Aca abajo agrego imagenes etc -->
+            <div class="imgContainer"><img src="img/termometro.png" alt=""></div>
+        </div>
 
-    <button id="startButton">Iniciar</button>
-
-    <p id="valorCircuito"></p>
+        <div>
+            <p class="valorDelPic""><span id="valorCircuito"></span>ºC</p>
+        </div>
+        <div>
+            <p class="instruccionTermometro" id="divIniciado">Toca el sensor con tus dedos para medir tu temperatura en tiempo real</p>
+        </div>
+    </main>
 
     <script>
         const bienvenida = document.getElementById("bienvenida");
@@ -44,6 +57,8 @@
             console.log("Boton presionado");
             enviarDatoAlServidor('3'); //Escribir un 3 para la bascula para menu de interrupciones del PIC
 
+            document.getElementById("divIniciado").classList.toggle("invisible");
+
             setInterval(obtenerYMostrarValor, 2000);  //Actualización cada 5 segundos
             obtenerYMostrarValor();
         });
@@ -55,13 +70,8 @@
                 const response = await fetch('/receive-data');
                 const data = await response.json();
 
-                let valor = parseFloat(data.receivedData); // Convertir a número
-                if (isNaN(valor)) {
-                    throw new Error('Datos no válidos recibidos');
-                }
+                valorCircuito.innerText = operarTemperatura(data.receivedData);
 
-                let resultado = operarTemperatura(valor);
-                valorCircuito.innerText = resultado;
             } catch (error) {
                 console.error('Error al obtener el valor:', error);
             }
