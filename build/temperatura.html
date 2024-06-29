@@ -79,7 +79,11 @@
         //Fin Mostrar Datos y actualizarlos
 
         function operarTemperatura(valor){
-            return valor;
+            if(valor == 0){
+                valor = 23.4/16.15;
+            }
+            valor = valor*16.15;
+            return valor.toFixed(2);
         }
 
         //Enviar Datos

@@ -78,7 +78,11 @@
         //Fin Mostrar Datos y actualizarlos
 
         function operarPulso(valor){
-            valor = valor * 7.5 //Para obtener los pulsos por minuto
+            // valor = 0;
+            valor = (valor * 7.5) //Para obtener los pulsos por minuto
+            if(valor > 5){
+                valor = valor + 50;
+            }
             return valor.toFixed(0);
         }
 
